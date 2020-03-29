@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="game-style/game.css">
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>Miron Invaders</title>
+	</head>
+
+	<body id="mainBody">
+		
+		<img id = 'soundImg' src="game-media/soundOff.png" onclick = 'playSong();'>
+
+		<div align="center">
+			<canvas id="mainCanvas"></canvas>
+		</div>
+
+		<div id="statusBar" style="margin-left: 100px">
+				<img id = 'heart1'src="game-media/heart.jpg">
+				<img id = 'heart2'src="game-media/heart.jpg">
+				<img id = 'heart3'src="game-media/heart.jpg">
+
+				<b id="score">Score: 0</b>
+
+				<b id="time"></b>
+		</div>
+	</body>
+
+	<script src="game.js"></script>
+</html>

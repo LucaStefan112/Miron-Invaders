@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="game-over.css">
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>GAME OVER</title>
+	</head>
+	<body>
+		<h1 id = 'GAME_OVER' align="center">GAME OVER!</h1>
+		
+		<p id = 'retry' align="center">Wanna retry?</p>
+
+		<div align="center">
+			<button id="button" onclick="playAudio()">YES</button>
+		</div>
+	</body>
+
+	<script>
+		function playAudio(){
+			let audio = document.createElement("audio");
+			audio.src = "start.mp3";
+			audio.play();
+			setTimeout(function(){window.location = '../../index.html';}, 1000);
+		}
+	</script>
+</html>

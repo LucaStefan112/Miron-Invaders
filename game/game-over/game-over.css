@@ -1,0 +1,46 @@
+*{
+	font-family: 'Press Start 2P', cursive;
+	color: white;
+}
+
+body{
+	background: black;
+}
+
+#GAME_OVER{
+	margin-top: 350px;
+	font-size: 50px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+#GAME_OVER:hover{
+	color:red;
+}
+
+#retry{
+	margin:40px;
+	padding: 5px;
+	font-size: 15px;
+}
+#retry:hover{
+	color:red;
+}
+
+#button{
+	margin-top: 20px;
+	width: 300px;
+	height: 100px;
+	background-color: black;
+	border: 5px solid white;
+	font-size: 20px;
+	animation-name: rotate;
+}
+
+#button:hover{
+	margin-top: 15px;
+	width: 310px;
+	height:110px;
+	background-color: red;
+	color: black;
+	font-size: 22px;
+}
