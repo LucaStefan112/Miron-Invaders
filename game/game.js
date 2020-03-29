@@ -313,16 +313,16 @@ let Enemy_generator = function(){
 
 	enemy_lastTime = current_time;
 
-	let type = Math.round(Math.random() * 3 + 1);
+	let type = Math.round(Math.random() * 5 + 1);
 	let speed = Math.round(Math.random() + 2);
 	let size = (2 - speed + 3) * 10;
 	let poz = (canvas.width - ship.width - ship_x <= ship.x) ? (0 - size) : canvas.width;
 
-	if(type == 1)
+	if(type == 1 || type == 2)
 
 		enemies.push(new Enemy(poz, canvas.height - size, 'runner', speed, 0, 0, size));		
 
-	else if(type == 2){
+	else if(type == 3){
 
 		let attack_delay = Math.round(Math.random() * 500 + 250);
 		let bullet_speed = 10 - attack_delay / 100;
@@ -331,15 +331,15 @@ let Enemy_generator = function(){
 
 	else{
 
-		let x = Math.round(Math.random() * 2) + 1;
+		let x = Math.round(Math.random() * 3) + 1;
 
 		if(x == 1)
 
 			enemies.push(new Enemy(0 - size, Math.round(Math.random() * canvas.height - size), 'flyer', speed, 0, 0, size));
 
-		else if(x == 2)
+		else if(x == 2 || x == 3)
 
-			enemies.push(new Enemy(Math.round(Math.random() * canvas.width), 0 - size, 'flyer', speed, 0, 0, size));
+			enemies.push(new Enemy(Math.round(Math.random() * (canvas.width - 60) + 30), 0 - size, 'flyer', speed, 0, 0, size));
 			
 		else
 
