@@ -4,11 +4,11 @@ let pause_now = false;
 
 ctx.fillStyle = "#0ff";
 
-let a = 5;
+let a = 25;
 let ship = new Image();
 ship.src = "game-media/Spaceship3.jpg";
-ship.width = 20;
-ship.height = 15;
+ship.width = 125;
+ship.height = 100;
 let ship_x = (canvas.width - ship.width) / 2;
 let ship_y = canvas.height - ship.height;
 let ship_x_velocity = 0;
@@ -20,9 +20,11 @@ let start_moment = 0, timer = 0;
 let screen_points = document.getElementById('score');
 let screen_time = document.getElementById('time');
 let bonus_life_time = 0;
-let miron_mad = false; let miron_mad_count = 0;
-let bullets = [], bullet_time = 0, bullet_speed = 10;
-
+let miron_mad = true; 
+let atrac = new Date();
+let miron_mad_count = atrac.getTime();
+let bullets = [], bullet_time = 0, bullet_speed = 100;
+let enemy_bullets = [];
 function Bullet(x, y, direction){
 	this.x = x;
 	this.y = y;
@@ -63,19 +65,19 @@ let bullet_control = function(keyPressed){
 
 	if(keyPressed.keyCode == 39)
 
-		bullets.push(new Bullet(ship_x + ship.width, ship_y + (ship.height - 5) / 2, 'right'));
+		bullets.push(new Bullet(ship_x + ship.width / 2, ship_y + (ship.height - 50) / 2, 'right'));
 
 	else if(keyPressed.keyCode == 38)
 
-		bullets.push(new Bullet(ship_x + (ship.width - 5) / 2, ship_y - 10, 'up'));
+		bullets.push(new Bullet(ship_x + (ship.width - 50) / 2, ship_y + ship.height / 2 - 100, 'up'));
 
 	else if(keyPressed.keyCode == 37)
 
-		bullets.push(new Bullet(ship_x - 10, ship_y + (ship.height - 5) / 2, 'left'));
+		bullets.push(new Bullet(ship_x - 100 + ship.width / 2, ship_y + (ship.height - 50) / 2, 'left'));
 
 	else
 
-		bullets.push(new Bullet(ship_x + (ship.width - 5) / 2, ship_y + ship.height, 'down'));
+		bullets.push(new Bullet(ship_x + (ship.width - 50) / 2, ship_y + ship.height / 2, 'down'));
 }
 
 let play = false;
@@ -223,25 +225,25 @@ let shipMovement = function(){
 	if(controller.up && !ship_jump){
 
 		audioJump();
-		ship_y_velocity -= 9;
+		ship_y_velocity -= 40;
 		ship_jump = true;
 	}
 
 	if(controller.down)
 
-		ship_y_velocity += 1;
+		ship_y_velocity += 5;
 
 	if(controller.left)
 
-		ship_x_velocity -= 0.5;
+		ship_x_velocity -= 9;
 
 	if(controller.right)
 
-		ship_x_velocity += 0.5;
+		ship_x_velocity += 9;
 
 	if(ship_y < canvas.height - ship.height)
 
-		ship_y_velocity += 0.5;
+		ship_y_velocity += 2;
 
 	if(0 >= ship_x + ship_x_velocity){
 
@@ -260,7 +262,7 @@ let shipMovement = function(){
 		ship_x += ship_x_velocity;
 
 	ship_y += ship_y_velocity;
-	ship_x_velocity *= 0.9;
+	ship_x_velocity *= 0.5;
 
 	if(ship_y > canvas.height - ship.height){
 
@@ -318,6 +320,8 @@ let Enemy_generator = function(){
 	let size = (2 - speed + 3) * 10;
 	let poz = (canvas.width - ship.width - ship_x <= ship.x) ? (0 - size) : canvas.width;
 
+	size *= 4; speed *= 6;
+
 	if(type == 1 || type == 2)
 
 		enemies.push(new Enemy(poz, canvas.height - size, 'runner', speed, 0, 0, size));		
@@ -325,7 +329,7 @@ let Enemy_generator = function(){
 	else if(type == 3){
 
 		let attack_delay = Math.round(Math.random() * 500 + 250);
-		let bullet_speed = 10 - attack_delay / 100;
+		let bullet_speed = (10 - attack_delay / 100) * 2;
 		enemies.push(new Enemy(poz, 0, 'shooter', speed, attack_delay, bullet_speed, size));	
 	}
 
@@ -339,7 +343,7 @@ let Enemy_generator = function(){
 
 		else if(x == 2 || x == 3)
 
-			enemies.push(new Enemy(Math.round(Math.random() * (canvas.width - 60) + 30), 0 - size, 'flyer', speed, 0, 0, size));
+			enemies.push(new Enemy(Math.round(Math.random() * (canvas.width - 600) + 300), 0 - size, 'flyer', speed, 0, 0, size));
 			
 		else
 
@@ -354,7 +358,7 @@ let Enemy_update = function(){
 	while(i < enemies.length){
 
 		if(((enemies[i].x <= ship_x + a && enemies[i].x + enemies[i].speed + enemies[i].size >= ship_x + a) || (enemies[i].x + enemies[i].size >= ship_x + ship.width - a && enemies[i].x - enemies[i].speed <= ship_x + ship.width - a) || (ship_x + a <= enemies[i].x && enemies[i].x <= ship_x + ship.width - a) || (ship_x + a <= enemies[i].x + enemies[i].size && enemies[i].x + enemies[i].size <= ship_x + ship.width - a)) && ((enemies[i].y <= ship_y + a && enemies[i].y + enemies[i].size + enemies[i].speed >= ship_y + a) || (enemies[i].y + enemies[i].size >= ship_y + ship.height - a && enemies[i].y - enemies[i].speed <= ship_y + ship.height - a) || (ship_y + a <= enemies[i].y && enemies[i].y <= ship_y + ship.height - a) || (ship_y + a <= enemies[i].y + enemies[i].size && enemies[i].y + enemies[i].size <= ship_y + ship.height - a))){
-			if(ship_life > 0 && !miron_mad){
+			if(ship_life > 0 && miron_mad == false){
 				ship_life--;
 				let audioMad = document.createElement("audio");
 				audioMad.src = "game-media/damageAudio.mp3";
@@ -401,41 +405,13 @@ let Enemy_update = function(){
 						enemies[i].x -= enemies[i].speed;
 
 					if(enemies[i].type == 'shooter'){
-
-						let j = 0;
-
-						while(j < enemies[i].bullets.length){
-
-							let x = enemies[i].bullets[j].x, y = enemies[i].bullets[j].y, speed = enemies[i].bullets[j].speed;
-
-							if(((x <= ship_x + a && x + 5 >= ship_x + a) || (x + 5 >= ship_x + ship.width - a && x <= ship_x + ship.width - a) || (ship_x + a <= x && x <= ship_x + ship.width - a) || (ship_x + a <= x + 5 && x + 5 <= ship_x + ship.width - a)) && ((y <= ship_y + a && y + 5 + speed >= ship_y + a) || (y + 5 >= ship_y + ship.height - a && y - speed <= ship_y + ship.height - a) || (ship_y + a <= y && y <= ship_y + ship.height - a) || (ship_y + a <= y + 5 && y + 5 <= ship_y + ship.height - a))){
-								enemies[i].bullets.splice(j, 1);
-								if(ship_life > 0 && !miron_mad){
-									let audioMad = document.createElement("audio");
-									audioMad.src = "game-media/damageAudio.mp3";
-									audioMad.play();
-									miron_mad = true;
-									ship_life--;
-								}
-							}
-
-							else if(y > canvas.height)
-								enemies[i].bullets.splice(j, 1);
-
-							else{
-								enemies[i].bullets[j].y += enemies[i].bullets[j].speed;
-								ctx.drawImage(enemies[i].bullets[j].bullet, enemies[i].bullets[j].x, enemies[i].bullets[j].y, 5, 5);
-								j++;
-							}
-						}
-
 						let date = new Date();
 						let current_bulletTime = date.getTime();
 
 						if(current_bulletTime - enemies[i].last_attack >= enemies[i].attack_delay){
 
 							enemies[i].last_attack = current_bulletTime;
-							enemies[i].bullets.push(new enemyBullet(enemies[i].x + (enemies[i].size - 5) / 2, enemies[i].y + enemies[i].size, enemies[i].bullet_speed));
+							enemy_bullets.push(new enemyBullet(enemies[i].x + (enemies[i].size - 50) / 2, enemies[i].y + enemies[i].size, enemies[i].bullet_speed));
 						}
 					}
 				}
@@ -513,6 +489,33 @@ let Enemy_update = function(){
 		}
 	}
 
+	let j = 0;
+
+	while(j < enemy_bullets.length){
+
+		let x = enemy_bullets[j].x, y = enemy_bullets[j].y, speed = enemy_bullets[j].speed;
+
+		if(((x <= ship_x + a && x + 50 >= ship_x + a) || (x + 50 >= ship_x + ship.width - a && x <= ship_x + ship.width - a) || (ship_x + a <= x && x <= ship_x + ship.width - a) || (ship_x + a <= x + 50 && x + 50 <= ship_x + ship.width - a)) && ((y <= ship_y + a && y + 50 + speed >= ship_y + a) || (y + 50 >= ship_y + ship.height - a && y - speed <= ship_y + ship.height - a) || (ship_y + a <= y && y <= ship_y + ship.height - a) || (ship_y + a <= y + 50 && y + 50 <= ship_y + ship.height - a))){
+			enemy_bullets.splice(j, 1);
+			if(ship_life > 0 && miron_mad == false){
+				let audioMad = document.createElement("audio");
+				audioMad.src = "game-media/damageAudio.mp3";
+				audioMad.play();
+				miron_mad = true;
+				ship_life--;
+			}
+		}
+
+		else if(y > canvas.height)
+			enemy_bullets.splice(j, 1);
+
+		else{
+			enemy_bullets[j].y += enemy_bullets[j].speed;
+			ctx.drawImage(enemy_bullets[j].bullet, enemy_bullets[j].x, enemy_bullets[j].y, 50, 50);
+			j++;
+		}
+	}
+
 	Enemy_generator();
 }
 
@@ -531,24 +534,24 @@ let update = function(){
 		else{
 
 			if(bullets[i].direction == 'left'){
-				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 10, 5);
+				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 100, 50);
 				bullets[i].x -= bullet_speed;
 			 	bullets[i].bullet.style.left = bullets[i].x + 'px';
 			}
 
 			else if(bullets[i].direction == 'up'){
-				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 5, 10);
+				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 50, 100);
 				bullets[i].y -= bullet_speed;
 				bullets[i].bullet.style.top = bullets[i].y + 'px';
 			}
 			else if(bullets[i].direction == 'right'){
-				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 10, 5);
+				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 100, 50);
 				bullets[i].x += bullet_speed;
 				bullets[i].bullet.style.left = bullets[i].x + 'px';
 			}	
 
 			else{
-				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 5, 10);
+				ctx.drawImage(bullets[i].bullet, bullets[i].x, bullets[i].y, 50, 100);
 				bullets[i].y += bullet_speed;
 				bullets[i].bullet.style.top = bullets[i].y + 'px';
 			}
@@ -606,8 +609,6 @@ let gameLoop = function(){
 
 	screen_time.textContent = 'Time: ' + Math.floor((pass_time - timer) / 1000) + 's';
 
-	checkMiron();
-
 	shipMovement();
 
 	update();
@@ -615,6 +616,8 @@ let gameLoop = function(){
 	Enemy_update();
 
 	checkStatus();
+
+	checkMiron();
 
 	if(!pause_now)
 
