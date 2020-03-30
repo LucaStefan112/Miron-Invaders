@@ -1,35 +1,49 @@
-let play = false;
-let mainAudio = document.createElement("audio");
-mainAudio.src = "media/main.mp3";
+<!DOCTYPE html>
 
-function Fade(){
-	let fade = document.createElement('div');
-	fade.id = 'box';
-	let body = document.getElementById('body');
-	body.appendChild(fade);
-}
-				
-function playAudio(){
-	let audio = document.createElement("audio");
-	audio.src = "media/start.mp3";
-	audio.play();
-	setTimeout(function(){window.location = 'game/game.html';}, 2000);
-}
-		
-let playSong = function(){
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style/index.css">
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<title>Miron Invaders</title>
+	</head>
 
-	play = !play;
+	<body id = 'body'>
 
-	if(play){
-		let soundImg = document.getElementById('soundImg');
-		soundImg.src = 'media/soundOn.png';
-		mainAudio.play();
-		mainAudio.loop = 'infinite';
-	}
+		<img id = 'soundImg' src="media/soundOff.png" onclick = 'playSong();'>
 
-	else{
-		let soundImg = document.getElementById('soundImg');
-		soundImg.src = 'media/soundOff.png';
-		mainAudio.pause();
-	}
-}
+		<div align="center">
+
+			<h1 id = "title">Miron Invaders</h1>
+			
+			<p id = "credits">by</p>
+			
+			<a href="https://www.facebook.com/lucastefan.tamas?ref=bookmarks" style="text-decoration: none">
+				<p id = "credits">Tamas Luca-Stefan</p>
+			</a>
+			
+			<a href="https://www.facebook.com/teo.sadici" style="text-decoration: none">
+				<p id = "credits">Sadici Aprofiri  Teodor Vasile</p>
+			</a>
+			
+			<p>
+				<img src='media/Spaceship3.jpg' id="mainImage">
+			</p>
+
+			<button id="button" onclick="playAudio(), Fade()">Start Game</button>
+
+		</div>
+
+		<div  id = 'controls1'>
+			<p>Keys:</p>
+			<p>W,A,S,D</p>
+			<p>to move.</p>
+		</div>
+
+		<div id = 'controls2'>
+			<p>Arrow: </p>
+			<p>Up,Down,Left,Right </p>
+			<p>to shoot.</p>
+		</div>
+		<script type="text/javascript" src="index.js"></script>
+	</body>
+</html>
