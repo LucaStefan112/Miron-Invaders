@@ -11,7 +11,7 @@
 #mainCanvas{
 	margin-top: 30px;
 	width: 90%;
-	height: 1050px;
+	height: 80%;
 	border: 4px solid white;
 }
 
@@ -25,7 +25,6 @@
 
 #statusBar{
 	margin-top: 0px;
-	padding: top: 0px;
 }
 
 #heart1, #heart2, #heart3{
@@ -35,16 +34,20 @@
 
 #score{
 	font-size: 28px;
-	position: absolute;
-	top: 1185px;
-	left: 1025px;
+	position: relative;
+	width: 80px;
+	height: 80px;
+	left: 50%;
+	top: -20px;
 }
 
 #time{
 	font-size: 28px;
-	position: absolute;
-	top: 1185px;
-	left: 2000px;
+	position: relative;
+	width: 80px;
+	height: 80px;
+	left: 50%;
+	top: -20px;
 }
 
 #runner{

@@ -6,12 +6,13 @@
 		<title>Miron Invaders</title>
 	</head>
 
+	
 	<body id="mainBody">
 		
 		<img id = 'soundImg' src="game-media/soundOff.png" onclick = 'playSong();'>
 
 		<div align="center">
-			<canvas id="mainCanvas"></canvas>
+			<canvas id="mainCanvas" height="10" width="10"></canvas>
 		</div>
 
 		<div id="statusBar" style="margin-left: 100px">
@@ -24,6 +25,23 @@
 				<b id="time"></b>
 		</div>
 	</body>
+	<script>
+    (function() {
+        var htmlCanvas = document.getElementById('mainCanvas');
 
+		initialize();
+
+		function initialize() {
+			window.addEventListener('resize', resizeCanvas, false);
+			resizeCanvas();
+        }
+
+        function resizeCanvas() {
+            htmlCanvas.width = window.innerWidth;
+            htmlCanvas.height = window.innerHeight * 8 / 10;
+        }
+    })();
+
+    </script>
 	<script src="game.js"></script>
 </html>

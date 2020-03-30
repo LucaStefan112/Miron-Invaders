@@ -7,8 +7,9 @@ ctx.fillStyle = "#0ff";
 let a = 5;
 let ship = new Image();
 ship.src = "game-media/Spaceship3.jpg";
-ship.width = 20;
-ship.height = 15;
+let scale = 8;
+ship.width = 15 * scale;
+ship.height = 10 * scale;
 let ship_x = (canvas.width - ship.width) / 2;
 let ship_y = canvas.height - ship.height;
 let ship_x_velocity = 0;
@@ -21,7 +22,7 @@ let screen_points = document.getElementById('score');
 let screen_time = document.getElementById('time');
 let bonus_life_time = 0;
 let miron_mad = false; let miron_mad_count = 0;
-let bullets = [], bullet_time = 0, bullet_speed = 10;
+let bullets = [], bullet_time = 0, bullet_speed = 10 * (11 - scale);
 
 function Bullet(x, y, direction){
 	this.x = x;
@@ -257,9 +258,9 @@ let shipMovement = function(){
 
 	else
 
-		ship_x += ship_x_velocity;
+		ship_x += ship_x_velocity * scale / 5;
 
-	ship_y += ship_y_velocity;
+	ship_y += ship_y_velocity * scale / 5;
 	ship_x_velocity *= 0.9;
 
 	if(ship_y > canvas.height - ship.height){
@@ -276,13 +277,13 @@ let Enemy = function(x, y, type, speed, attack_delay, bullet_speed, size){
 	this.x = x;
 	this.y = y;
 	this.type = type; 
-	this.speed = speed;
+	this.speed = speed * (10 - scale);
 	this.size = size;
 
 	if(type == 'shooter'){
-
+		this.speed = speed;
 		this.attack_delay = attack_delay;
-		this.bullet_speed = bullet_speed;
+		this.bullet_speed = bullet_speed * (11 - scale);
 		this.last_attack = 0;
 		this.bullets = [];
 	}
@@ -299,6 +300,8 @@ let enemyBullet = function(x, y, speed){
 	this.speed = speed;
 	this.bullet = document.createElement('img');
 	this.bullet.src = 'game-media/EnemyBullet.png';
+	this.bullet.width = this.bullet.width * scale;
+	this.bullet.height = this.bullet.height * scale;
 	this.bullet.id = 'enemyBullet';
 }
 
@@ -315,7 +318,7 @@ let Enemy_generator = function(){
 
 	let type = Math.round(Math.random() * 5 + 1);
 	let speed = Math.round(Math.random() + 2);
-	let size = (2 - speed + 3) * 10;
+	let size = (2 - speed + 3) * 4 * scale;
 	let poz = (canvas.width - ship.width - ship_x <= ship.x) ? (0 - size) : canvas.width;
 
 	if(type == 1 || type == 2)
