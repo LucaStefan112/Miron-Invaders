@@ -11,7 +11,7 @@
 #mainCanvas{
 	margin-top: 30px;
 	width: 90%;
-	height: 100%;
+	height: 80%;
 	border: 4px solid white;
 }
 
@@ -25,7 +25,6 @@
 
 #statusBar{
 	margin-top: 0px;
-	padding: top: 0px;
 }
 
 #heart1, #heart2, #heart3{
@@ -38,7 +37,7 @@
 	position: relative;
 	width: 80px;
 	height: 80px;
-	left: 65%;
+	left: 50%;
 	top: -20px;
 }
 
@@ -47,7 +46,7 @@
 	position: relative;
 	width: 80px;
 	height: 80px;
-	left: 65%;
+	left: 50%;
 	top: -20px;
 }
 
