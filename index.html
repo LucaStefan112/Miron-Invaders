@@ -2,46 +2,43 @@
 
 <html>
 	<head>
+		<meta charset="UTF-8">
+  		<meta name="description" content="Javascript game for higschool project.">
+  		<meta name="keywords" content="HTML, CSS, JavaScript">
+  		<meta name="author" content="Tamaș Luca-Ștefan">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="style/index.css">
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
 		<title>Miron Invaders</title>
 	</head>
 
-	<body id = 'body'>
-
+	<body id = "body" style="display: flex; flex-direction: row; align-items: center; justify-content:space-between; margin-top: 3%;">
 		<img id = 'soundImg' src="media/soundOff.png" onclick = 'playSong();'>
+		
+		<div  style="display: flex; justify-content: center; align-items: flex-start; flex-direction: column; margin-left: 2%;">
+			<p>Keys:</p>
+			<p>W,A,S,D</p>
+			<p>to move.</p>
+		</div>
 
-		<div align="center">
+		<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-left: 7%;">
 
 			<h1 id = "title">Miron Invaders</h1>
-			
 			<p id = "credits">by</p>
 			
 			<a href="https://www.facebook.com/lucastefan.tamas?ref=bookmarks" style="text-decoration: none">
 				<p id = "credits">Tamas Luca-Stefan</p>
 			</a>
 			
-			<a href="https://www.facebook.com/teo.sadici" style="text-decoration: none">
-				<p id = "credits">Sadici Aprofiri  Teodor Vasile</p>
-			</a>
-			
-			<p>
-				<img src='media/Spaceship3.jpg' id="mainImage">
-			</p>
+			<img src='media/Spaceship.png' id="mainImage">
 
 			<button id="button" onclick="playAudio(), Fade()">Start Game</button>
 
 		</div>
 
-		<div  id = 'controls1'>
-			<p>Keys:</p>
-			<p>W,A,S,D</p>
-			<p>to move.</p>
-		</div>
-
-		<div id = 'controls2'>
-			<p>Arrow: </p>
-			<p>Up,Down,Left,Right </p>
+		<div  style="display: flex; justify-content: center; align-items: flex-end; flex-direction: column; margin-right: 2%;">
+			<p>Arrow:</p>
+			<p>Up,Down,Left,Right</p>
 			<p>to shoot.</p>
 		</div>
 		<script type="text/javascript" src="index.js"></script>

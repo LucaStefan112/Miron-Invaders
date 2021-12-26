@@ -4,9 +4,9 @@ mainAudio.src = "media/main.mp3";
 
 function Fade(){
 	let fade = document.createElement('div');
-	fade.id = 'box';
 	let body = document.getElementById('body');
 	body.appendChild(fade);
+	fade.id = 'box';
 }
 				
 function playAudio(){

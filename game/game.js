@@ -6,7 +6,7 @@ ctx.fillStyle = "#0ff";
 
 let a = 25;
 let ship = new Image();
-ship.src = "game-media/Spaceship3.jpg";
+ship.src = "game-media/Spaceship.png";
 ship.width = 125;
 ship.height = 100;
 let ship_x = (canvas.width - ship.width) / 2;
@@ -110,24 +110,24 @@ let checkStatus = function(){
 
 	if(ship_life == 3)
 
-		heart1.src = heart2.src = heart3.src = 'game-media/heart.jpg';
+		heart1.src = heart2.src = heart3.src = 'game-media/heart.png';
 
 	else if(ship_life == 2){
 
-		heart1.src = heart2.src = 'game-media/heart.jpg';
-		heart3.src = 'game-media/heartLow.jpg';
+		heart1.src = heart2.src = 'game-media/heart.png';
+		heart3.src = 'game-media/heartLow.png';
 	}
 
 	else if(ship_life == 1){
 
-		heart1.src = 'game-media/heart.jpg';
-		heart2.src = heart3.src = 'game-media/heartLow.jpg';
+		heart1.src = 'game-media/heart.png';
+		heart2.src = heart3.src = 'game-media/heartLow.png';
 	}
 
 	else{
 		let game_over = document.createElement("audio");
 		game_over.src = "game-media/final_sound.mp3";
-		heart1.src = heart2.src = heart3.src = 'game-media/heartLow.jpg';
+		heart1.src = heart2.src = heart3.src = 'game-media/heartLow.png';
 		game_over.play();
 		setTimeout(function(){window.location = 'game-over/game-over.html';}, 2000);
 		pause_now = true;
@@ -568,13 +568,13 @@ let checkMiron = function(){
 
 	if(miron_mad == false){
 
-		ship.src = "game-media/Spaceship3.jpg";
+		ship.src = "game-media/Spaceship.png";
 		miron_mad_count = curTime;
 	}
 
 	else{
 
-		ship.src = 'game-media/shipMad.jpg';
+		ship.src = 'game-media/SpaceshipMad.png';
 		
 		if(curTime - miron_mad_count > 2000)
 			
