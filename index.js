@@ -2,6 +2,7 @@ let play = false;
 let mainAudio = document.createElement("audio");
 mainAudio.src = "media/main.mp3";
 
+//Fade effect for changing windows:
 function Fade(){
 	let fade = document.createElement('div');
 	let body = document.getElementById('body');
@@ -15,7 +16,8 @@ function playAudio(){
 	audio.play();
 	setTimeout(function(){window.location = 'game/game.html';}, 2000);
 }
-		
+
+//Background sound:
 let playSong = function(){
 
 	play = !play;
